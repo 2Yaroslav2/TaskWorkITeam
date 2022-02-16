@@ -1,0 +1,100 @@
+<div class="wrapper">
+  <div class="empty-space height-medium" style="height: 32px">
+    <span class="empty-space-inner"></span>
+  </div>
+  <div class="block-border block-position">
+    <form [formGroup]="form" class="example-form">
+
+      <div class="empty-space height-medium" style="height: 32px">
+        <span class="empty-space-inner"></span>
+      </div>
+
+      <div class="inside">
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>First name</mat-label>
+          <input matInput formControlName="firstName" type="text">
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Last name</mat-label>
+          <input matInput formControlName="lastName" type="text">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Date Of Birth</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="dateOfBirth">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Framework</mat-label>
+          <mat-select formControlName="framework" name="framework">
+            <mat-option *ngFor="let framework of frameworkList; let idx = index" (click)="onSelect(idx)" [value]="framework.name">
+              {{framework.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Framework Version</mat-label>
+          <mat-select formControlName="frameworkVersion" [disabled]="selectFramework">
+            <mat-option *ngFor="let version of versionList" [value]="version">
+              {{version}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email" type="email" >
+        </mat-form-field>
+
+        <div *ngIf="flagAddBlock" class="block-border">
+          <ul class="option-hobby">
+            <li *ngFor="let hobby of hobbyList">
+              <span>Name hobby: {{hobby.name}}</span>
+              <span>Duration: {{hobby.duration}}</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="empty-space height-medium" style="height: 32px">
+          <span class="empty-space-inner"></span>
+        </div>
+
+        <form [formGroup]="formHobby" class="block-border block-hobby">
+          <div>
+            <mat-form-field class="example-full-width" appearance="fill">
+              <mat-label>Name hobby</mat-label>
+              <input matInput formControlName="name" type="text">
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width" appearance="fill">
+              <mat-label>Duration</mat-label>
+              <input matInput formControlName="duration" type="text">
+            </mat-form-field>
+
+            <button mat-raised-button color="primary"  (click)="addHobby()">Add</button>
+          </div>
+        </form>
+
+        <div class="empty-space height-medium" style="height: 32px">
+          <span class="empty-space-inner"></span>
+        </div>
+
+        <div class="option-button">
+          <button mat-raised-button color="primary"
+                  (click)="saveUser()" [disabled]="!form.valid">Save</button>
+          <button mat-raised-button color="primary">Cancel</button>
+        </div>
+
+        <div class="empty-space height-medium" style="height: 32px">
+          <span class="empty-space-inner"></span>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+
